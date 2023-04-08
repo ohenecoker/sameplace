@@ -451,7 +451,7 @@ defmodule SameplaceWeb.CoreComponents do
         <tbody class="relative divide-y divide-zinc-100 border-t border-zinc-200 text-sm leading-6 text-zinc-700">
           <tr
             :for={row <- @rows}
-            id={"#{@id}-#{Phoenix.Param.to_param(row)}"}
+            id={"#{@id}-#{row |> elem(0)}"}
             class="relative group hover:bg-zinc-50"
           >
             <td
