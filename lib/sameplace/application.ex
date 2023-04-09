@@ -14,6 +14,8 @@ defmodule Sameplace.Application do
       Sameplace.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: Sameplace.PubSub},
+      # Presence
+      Sameplace.Presence,
       # Start Finch
       {Finch, name: Sameplace.Finch},
       # Start the Endpoint (http/https)

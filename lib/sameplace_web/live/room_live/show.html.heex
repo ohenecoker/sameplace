@@ -13,6 +13,13 @@
   <:item title="Slug"><%= @room.slug %></:item>
 </.list>
 
+<div>
+  <h2><b>Connected Users</b></h2>
+  <.list>
+    <:item title="Uuid"><%= @connected_users %></:item>
+  </.list>
+</div>
+
 <.back navigate={~p"/rooms"}>Back to rooms</.back>
 
 <.modal :if={@live_action == :edit} id="room-modal" show on_cancel={JS.patch(~p"/rooms/#{@room}")}>
