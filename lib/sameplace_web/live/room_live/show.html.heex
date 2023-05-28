@@ -20,6 +20,80 @@
   </.list>
 </div>
 
+<div class="streams">
+  <video id="local-video" playsinline autoplay muted width="600"></video>
+  <.list>
+    <:item title="User streams">
+      <video
+        id="video-remote-#{@connected_users.uuid}"
+        data-user-uuid="@connected_users.uuid"
+        playsinline
+        autoplay
+        muted
+        width="600"
+        phx-hook="InitUser"
+      >
+      </video>
+    </:item>
+  </.list>
+</div>
+<button id="join-call" class="button" phx-click="join_call" phx-hook="JoinCall">Join Call</button>
+
+<div id="offer-requests">
+  <.list>
+    <:item title="Offer requests">
+      <span
+        id="@offer_requests.from_user.uuid"
+        phx-hook="HandleOfferRequest"
+        data-from-user-uuid="@offer_requests.from_user.uuid"
+      >
+      </span>
+    </:item>
+  </.list>
+</div>
+
+<div id="sdp-offers">
+  <.list>
+    <:item title="SDP Offer">
+      <span
+        id='@sdp_offers["from_user"]'
+        phx-hook="HandleSdpOffer"
+        data-from-user-uuid='@sdp_offers["from_user"]'
+        data-sdp='@sdp_offers["description"]["sdp"]'
+      >
+      </span>
+    </:item>
+  </.list>
+</div>
+
+<div id="sdp-answers">
+  <.list>
+    <:item title="Answers">
+      <span
+        id='@answers["from_user"]'
+        phx-hook="HandleAnswer"
+        data-from-user-uuid='@answers["from_user"]'
+        data-sdp='@answers["description"]["sdp"]'
+      >
+      </span>
+    </:item>
+  </.list>
+</div>
+
+<div id="ice-candidates">
+  <.list>
+    <:item title="Candidates">
+      <span
+        id='@ice_candidate_offers["from_user"]'
+        phx-hook="HandleIceCandidateOffer"
+        data-from-user-uuid='@ice_candidate_offers["from_user"]'
+        data-ice-candidate='Jason.encode!(@ice_candidate_offers["candidate"])'
+      >
+      </span>
+    </:item>
+  </.list>
+</div>
+
 <.back navigate={~p"/rooms"}>Back to rooms</.back>
 
 <.modal :if={@live_action == :edit} id="room-modal" show on_cancel={JS.patch(~p"/rooms/#{@room}")}>
